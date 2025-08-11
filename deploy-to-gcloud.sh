@@ -17,8 +17,8 @@ if ! gcloud auth list --filter=status:ACTIVE --format="value(account)" | grep -q
     gcloud auth login
 fi
 
-# Solicitar ID del proyecto
-read -p "Ingresa el ID del proyecto de Google Cloud: " PROJECT_ID
+# ID del proyecto
+PROJECT_ID="starry-core-401213"
 
 # Verificar que el proyecto exista
 if ! gcloud projects describe $PROJECT_ID &> /dev/null; then
@@ -52,36 +52,22 @@ if [ ! -f "server.js" ]; then
     exit 1
 fi
 
-# Verificar que los archivos minificados existan
-if [ ! -f "styles.min.css" ]; then
-    echo "Error: No se encuentra styles.min.css. Asegúrate de haber minificado los archivos CSS."
-    exit 1
-fi
-
-if [ ! -f "scripts.min.js" ]; then
-    echo "Error: No se encuentra scripts.min.js. Asegúrate de haber minificado los archivos JavaScript."
-    exit 1
-fi
-
-# Configurar variables de entorno para Twitter API
-echo "Configurando variables de entorno para Twitter API..."
-echo "Nota: Estas credenciales se configurarán en Google Cloud, no se guardarán localmente."
-
-read -p "Twitter API Key: " TWITTER_API_KEY
-read -p "Twitter API Key Secret: " TWITTER_API_KEY_SECRET
-read -p "Twitter Access Token: " TWITTER_ACCESS_TOKEN
-read -p "Twitter Access Token Secret: " TWITTER_ACCESS_TOKEN_SECRET
-read -p "Twitter Client ID: " TWITTER_CLIENT_ID
-read -p "Twitter Client Secret: " TWITTER_CLIENT_SECRET
+# Credenciales de Twitter
+TWITTER_API_KEY="kVpOupfAGVL6AIlcsI70i4OZa"
+TWITTER_API_KEY_SECRET="BTUN58AHIrtzOpvlGbgRXXQC7rdoxIczG73p7fl9RKGBjWpG94"
+TWITTER_ACCESS_TOKEN="GzUdQ8NOtkcvFxa7wflaTrloPNQovqzVlnhkJMU6"
+TWITTER_ACCESS_TOKEN_SECRET="X2NqzBvNCXbNRgAYSMZWCfC7rj9jw5atPRZuu10mtpEBp"
+TWITTER_CLIENT_ID="Mm5XSl9SQWFVR1REZ0NRMVZvZ046MTpjaQ"
+TWITTER_CLIENT_SECRET="l2Vgcul-_sIxLogK9MZoaQxeoZXv8GyKJgeCz-a07gCHsi3k5p"
 
 # Actualizar app.yaml con las credenciales
 echo "Actualizando app.yaml con las credenciales..."
-sed -i "s/TWITTER_API_KEY: \"tu_api_key\"/TWITTER_API_KEY: \"$TWITTER_API_KEY\"/" app.yaml
-sed -i "s/TWITTER_API_KEY_SECRET: \"tu_api_key_secret\"/TWITTER_API_KEY_SECRET: \"$TWITTER_API_KEY_SECRET\"/" app.yaml
-sed -i "s/TWITTER_ACCESS_TOKEN: \"tu_access_token\"/TWITTER_ACCESS_TOKEN: \"$TWITTER_ACCESS_TOKEN\"/" app.yaml
-sed -i "s/TWITTER_ACCESS_TOKEN_SECRET: \"tu_access_token_secret\"/TWITTER_ACCESS_TOKEN_SECRET: \"$TWITTER_ACCESS_TOKEN_SECRET\"/" app.yaml
-sed -i "s/TWITTER_CLIENT_ID: \"tu_client_id\"/TWITTER_CLIENT_ID: \"$TWITTER_CLIENT_ID\"/" app.yaml
-sed -i "s/TWITTER_CLIENT_SECRET: \"tu_client_secret\"/TWITTER_CLIENT_SECRET: \"$TWITTER_CLIENT_SECRET\"/" app.yaml
+sed -i "s/TWITTER_API_KEY: .*/TWITTER_API_KEY: '$TWITTER_API_KEY'/" app.yaml
+sed -i "s/TWITTER_API_KEY_SECRET: .*/TWITTER_API_KEY_SECRET: '$TWITTER_API_KEY_SECRET'/" app.yaml
+sed -i "s/TWITTER_ACCESS_TOKEN: .*/TWITTER_ACCESS_TOKEN: '$TWITTER_ACCESS_TOKEN'/" app.yaml
+sed -i "s/TWITTER_ACCESS_TOKEN_SECRET: .*/TWITTER_ACCESS_TOKEN_SECRET: '$TWITTER_ACCESS_TOKEN_SECRET'/" app.yaml
+sed -i "s/TWITTER_CLIENT_ID: .*/TWITTER_CLIENT_ID: '$TWITTER_CLIENT_ID'/" app.yaml
+sed -i "s/TWITTER_CLIENT_SECRET: .*/TWITTER_CLIENT_SECRET: '$TWITTER_CLIENT_SECRET'/" app.yaml
 
 # Instalar dependencias
 echo "Instalando dependencias..."

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>¡Gracias por Compartir! - MetaSoccer Community</title>
+    <link rel="stylesheet" href="styles.min.css" />
+    <style>
+      .thanks-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+        text-align: center;
+      }
+
+      .resource-unlocked {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        padding: 2rem;
+        margin: 2rem 0;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      .resource-icon {
+        width: 80px;
+        height: 80px;
+        margin: 0 auto 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #dc2626, #ef4444);
+      }
+
+      .resource-icon svg {
+        width: 40px;
+        height: 40px;
+        color: white;
+      }
+
+      .download-button {
+        background: linear-gradient(135deg, #1e40af, #3b82f6);
+        color: white;
+        border: none;
+        padding: 0.75rem 1.5rem;
+        border-radius: 5px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-top: 1rem;
+      }
+
+      .download-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      .back-link {
+        display: inline-block;
+        margin-top: 2rem;
+        color: white;
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="bg-animation"></div>
+
+    <!-- Header -->
+    <header class="header">
+      <div class="header-container">
+        <img src="images/logo.png" alt="MetaSoccer Community" class="logo" />
+      </div>
+    </header>
+
+    <!-- Thanks Section -->
+    <section class="thanks-container">
+      <h1>¡Gracias por Compartir!</h1>
+      <p>
+        Tu recurso ha sido desbloqueado exitosamente. Ahora puedes acceder a él
+        cuando quieras.
+      </p>
+
+      <div class="resource-unlocked">
+        <div class="resource-icon">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M20 2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h4l4 4 4-4h4c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-3 12H7v-2h10v2zm0-3H7V9h10v2zm0-3H7V6h10v2z"
+            />
+          </svg>
+        </div>
+        <h2 id="resourceTitle">Tu Recurso Desbloqueado</h2>
+        <p id="resourceDescription">Descripción del recurso desbloqueado.</p>
+
+        <button class="download-button" id="accessButton">Acceder Ahora</button>
+      </div>
+
+      <p>
+        Recuerda que puedes desbloquear más recursos compartiendo en Twitter.
+      </p>
+
+      <a href="index.html" class="back-link">Volver a la página principal</a>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>© 2023 metasoccer.community - Tu comunidad para dominar MetaSoccer</p>
+    </footer>
+
+    <script>
+      // Obtener información del recurso compartido desde la URL
+      window.addEventListener('DOMContentLoaded', function () {
+        // Intentar obtener el recurso de la URL o localStorage
+        const urlParams = new URLSearchParams(window.location.search);
+        const resourceTitle =
+          urlParams.get('title') ||
+          localStorage.getItem('sharedResourceTitle') ||
+          'Recurso Desbloqueado';
+        const resourceDescription =
+          urlParams.get('desc') ||
+          localStorage.getItem('sharedResourceDescription') ||
+          'Ahora tienes acceso a este contenido exclusivo.';
+
+        // Actualizar la página con la información del recurso
+        document.getElementById('resourceTitle').textContent = resourceTitle;
+        document.getElementById('resourceDescription').textContent =
+          resourceDescription;
+
+        // Configurar el botón de acceso
+        document
+          .getElementById('accessButton')
+          .addEventListener('click', function () {
+            alert(
+              '¡Acceso concedido! El recurso estará disponible en tu área de miembro próximamente.'
+            );
+          });
+      });
+    </script>
+  </body>
+</html>

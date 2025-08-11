@@ -1,0 +1,26 @@
+# Archivos y directorios que no se deben subir a Google Cloud
+.git
+.gitignore
+.github
+.vscode
+node_modules
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# Archivos de desarrollo que no son necesarios en producción
+*.log
+*.md
+!README.md
+.DS_Store
+Thumbs.db
+
+# Versiones no minificadas de archivos estáticos
+# styles.css
+# scripts.js
+
+# Directorios de versiones anteriores
+versiones/
+
+# Archivos de datos locales
+data/

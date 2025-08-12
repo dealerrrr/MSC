@@ -1,3 +1,5 @@
+// Importar la configuración de Twitter
+import twitterConfig from './twitter-config.js';
 import { saveToXJson } from './x-json-handler.js';
 
 /**
@@ -41,29 +43,50 @@ async function saveTwitterUser(
  * Clase para manejar la interacción con la API de Twitter
  */
 class TwitterAPI {
-  constructor() {
-    this.config = null;
+  constructor(config = twitterConfig) {
+    this.config = config;
+    this.initialized = false;
   }
 
-  async fetchConfig() {
-    if (this.config) {
-      return this.config;
-    }
-
+  /**
+   * Inicializa la API de Twitter con las credenciales proporcionadas
+   * @returns {Promise<boolean>} - Promesa que se resuelve cuando la API está inicializada
+   */
+  async initialize() {
     try {
-      const response = await fetch('/api/twitter-config');
-      if (!response.ok) {
-        throw new Error('No se pudo obtener la configuración de Twitter');
+      // Verificar que todas las claves necesarias estén configuradas
+      const requiredKeys = [
+        'apiKey',
+        'apiKeySecret',
+        'accessToken',
+        'accessTokenSecret',
+        'clientId',
+        'clientSecret',
+      ];
+
+      const missingKeys = requiredKeys.filter(
+        key =>
+          !this.config[key] || this.config[key] === `TU_${key.toUpperCase()}`
+      );
+
+      if (missingKeys.length > 0) {
+        console.error(
+          'Error: Faltan claves de configuración para la API de Twitter:',
+          missingKeys
+        );
+        alert(
+          'Por favor, configura las claves de la API de Twitter en el archivo twitter-config.js'
+        );
+        return false;
       }
-      this.config = await response.json();
-      return this.config;
+
+      // En una implementación real, aquí se inicializaría la biblioteca de Twitter
+      console.log('API de Twitter inicializada correctamente');
+      this.initialized = true;
+      return true;
     } catch (error) {
-      console.error('Error al obtener la configuración de Twitter:', error);
-      // Devolver una configuración por defecto en caso de error
-      return {
-        defaultShareText: '¡Estoy explorando MetaSoccer Community! La plataforma definitiva para dominar el juego del futuro. #MetaSoccer #GameFi #P2E',
-        redirectUrl: 'gracias.html',
-      };
+      console.error('Error al inicializar la API de Twitter:', error);
+      return false;
     }
   }
 
@@ -77,8 +100,14 @@ class TwitterAPI {
    */
   async sharePost(message = null, username = null, email = '', resource = '') {
     try {
-      const config = await this.fetchConfig();
-      const tweetText = message || config.defaultShareText;
+      if (!this.initialized) {
+        const initialized = await this.initialize();
+        if (!initialized) {
+          throw new Error('La API de Twitter no está inicializada');
+        }
+      }
+
+      const tweetText = message || this.config.defaultShareText;
 
       // Devolver una promesa que se resolverá cuando el usuario complete el proceso
       return new Promise((resolve, reject) => {
@@ -125,7 +154,7 @@ class TwitterAPI {
               resolve({
                 success: true,
                 message: 'Tweet compartido exitosamente',
-                redirectUrl: config.redirectUrl,
+                redirectUrl: this.config.redirectUrl,
                 username: username,
               });
             }

@@ -1,17 +1,30 @@
 // Configuración de la API de Twitter
-// Reemplaza estos valores con tus propias claves y tokens de la API de Twitter
+// En producción, estas credenciales se obtienen de variables de entorno configuradas en Google Cloud
+const isProduction =
+  typeof process !== 'undefined' &&
+  process.env &&
+  process.env.NODE_ENV === 'production';
+
+// Función para obtener un valor de configuración, con fallback para desarrollo local
+function getConfigValue(envName, defaultValue) {
+  if (isProduction && typeof process !== 'undefined' && process.env) {
+    return process.env[envName] || defaultValue;
+  }
+  return defaultValue;
+}
+
 const twitterConfig = {
   // Claves de API (obtenidas de https://developer.twitter.com/en/portal/dashboard)
-  apiKey: 'kVpOupfAGVL6AIlcsI70i4OZa',
-  apiKeySecret: 'BTUN58AHIrtzOpvlGbgRXXQC7rdoxIczG73p7fl9RKGBjWpG94',
+  apiKey: getConfigValue('TWITTER_API_KEY', ''),
+  apiKeySecret: getConfigValue('TWITTER_API_KEY_SECRET', ''),
 
   // Tokens de acceso (obtenidos después de crear una App en Twitter Developer Portal)
-  accessToken: '186578794-GzUdQ8NOtkcvFxa7wflaTrloPNQovqzVlnhkJMU6',
-  accessTokenSecret: 'X2NqzBvNCXbNRgAYSMZWCfC7rj9jw5atPRZuu10mtpEBp',
+  accessToken: getConfigValue('TWITTER_ACCESS_TOKEN', ''),
+  accessTokenSecret: getConfigValue('TWITTER_ACCESS_TOKEN_SECRET', ''),
 
   // ID de cliente OAuth 2.0 (para autenticación)
-  clientId: 'Mm5XSl9SQWFVR1REZ0NRMVZvZ046MTpjaQ',
-  clientSecret: 'l2Vgcul-_sIxLogK9MZoaQxeoZXv8GyKJgeCz-a07gCHsi3k5p',
+  clientId: getConfigValue('TWITTER_CLIENT_ID', ''),
+  clientSecret: getConfigValue('TWITTER_CLIENT_SECRET', ''),
 
   // Texto predeterminado para compartir (puedes modificarlo según tus necesidades)
   defaultShareText:

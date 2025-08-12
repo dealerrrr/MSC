@@ -1,0 +1,71 @@
+html, body {
+  height: 100%;
+  margin: 0; /* Removed margin to allow 100% width to truly span the viewport */
+}
+body {
+  display: flex;
+  flex-direction: column;
+}
+.thanks-container {
+  flex-grow: 1; /* This makes the content area expand */
+  padding-top: 6rem; /* To push content down from header */
+  max-width: 800px;
+  margin: 4rem auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.resource-unlocked {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 2rem;
+  margin: 2rem 0;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.resource-icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #dc2626, #ef4444);
+}
+
+.resource-icon svg {
+  width: 40px;
+  height: 40px;
+  color: white;
+}
+
+.download-button {
+  background: linear-gradient(135deg, #1e40af, #3b82f6);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+}
+
+.download-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.back-link {
+  display: inline-block;
+  margin-top: 2rem;
+  color: white;
+  text-decoration: underline;
+}
+
+.footer {
+  width: 100%;
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}

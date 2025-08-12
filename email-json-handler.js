@@ -140,19 +140,19 @@ export function showSubscriptionConfirmation(email) {
   // Botón de aceptar
   const acceptButton = document.createElement('button');
   acceptButton.textContent = 'Entendido';
-  acceptButton.style.backgroundColor = '#4CAF50'; // Green
+  acceptButton.style.background = 'linear-gradient(135deg, #1e40af, #3b82f6)'; // Blue gradient
   acceptButton.style.color = 'white';
   acceptButton.style.border = 'none';
   acceptButton.style.borderRadius = '4px';
   acceptButton.style.padding = '10px 25px';
   acceptButton.style.fontSize = '16px';
   acceptButton.style.cursor = 'pointer';
-  acceptButton.style.transition = 'background-color 0.3s';
+  acceptButton.style.transition = 'all 0.3s ease'; // Transition for all properties
   acceptButton.onmouseover = () => {
-    acceptButton.style.backgroundColor = '#45a049'; // Darker green on hover
+    acceptButton.style.background = 'linear-gradient(135deg, #3b82f6, #1e40af)'; // Reversed gradient on hover
   };
   acceptButton.onmouseout = () => {
-    acceptButton.style.backgroundColor = '#4CAF50';
+    acceptButton.style.background = 'linear-gradient(135deg, #1e40af, #3b82f6)';
   };
   acceptButton.onclick = () => {
     document.body.removeChild(overlay);

@@ -7,15 +7,14 @@ import {
 } from './email-json-handler.js';
 
 // FAQ functionality
-function toggleFAQ(index) {
-  const faqItems = document.querySelectorAll('.faq-item');
-  const currentItem = faqItems[index];
-  const answer = currentItem.querySelector('.faq-answer');
-  const arrow = currentItem.querySelector('.faq-arrow');
+function toggleFAQ(element) {
+  const faqItem = element.parentElement;
+  const answer = faqItem.querySelector('.faq-answer');
+  const arrow = element.querySelector('.faq-arrow');
 
   // Close all other FAQs
-  faqItems.forEach((item, i) => {
-    if (i !== index) {
+  document.querySelectorAll('.faq-item').forEach(item => {
+    if (item !== faqItem) {
       item.querySelector('.faq-answer').classList.remove('active');
       item.querySelector('.faq-arrow').classList.remove('active');
     }
@@ -35,6 +34,7 @@ function scrollToFinalCTA() {
 
 // Exponer la función globalmente para que pueda ser accedida desde el HTML
 window.scrollToFinalCTA = scrollToFinalCTA;
+window.toggleFAQ = toggleFAQ;
 
 // Form submissions
 document.getElementById('heroForm').addEventListener('submit', function (e) {

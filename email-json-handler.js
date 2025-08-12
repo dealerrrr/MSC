@@ -92,7 +92,7 @@ export function showSubscriptionConfirmation(email) {
 
   const popup = document.createElement('div');
   popup.className = 'subscription-popup';
-  popup.style.backgroundColor = '#fff';
+  popup.style.backgroundColor = '#0a0a15';
   popup.style.borderRadius = '8px';
   popup.style.padding = '30px';
   popup.style.maxWidth = '500px';
@@ -111,7 +111,7 @@ export function showSubscriptionConfirmation(email) {
   closeButton.style.background = 'none';
   closeButton.style.fontSize = '24px';
   closeButton.style.cursor = 'pointer';
-  closeButton.style.color = '#333';
+  closeButton.style.color = 'white'; // Changed to white for visibility on dark background
   closeButton.onclick = () => {
     document.body.removeChild(overlay);
   };
@@ -119,7 +119,7 @@ export function showSubscriptionConfirmation(email) {
   // Contenido del popup
   const title = document.createElement('h2');
   title.textContent = '¡Suscripción Exitosa!';
-  title.style.color = '#1e40af';
+  title.style.color = '#ff6b35';
   title.style.marginBottom = '15px';
 
   const message = document.createElement('p');
@@ -127,7 +127,7 @@ export function showSubscriptionConfirmation(email) {
   message.style.marginBottom = '20px';
   message.style.fontSize = '16px';
   message.style.lineHeight = '1.5';
-  message.style.color = '#333'; // Added for visibility
+  message.style.color = 'white'; // Changed to white for visibility on dark background
 
   const subMessage = document.createElement('p');
   subMessage.textContent =
@@ -135,7 +135,7 @@ export function showSubscriptionConfirmation(email) {
   subMessage.style.marginBottom = '25px';
   subMessage.style.fontSize = '14px';
   subMessage.style.opacity = '0.8';
-  subMessage.style.color = '#333'; // Added for visibility
+  subMessage.style.color = 'white'; // Changed to white for visibility on dark background
 
   // Botón de aceptar
   const acceptButton = document.createElement('button');

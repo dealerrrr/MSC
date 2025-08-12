@@ -110,3 +110,5 @@ Para probar la funcionalidad:
    ```javascript
    console.log(JSON.parse(localStorage.getItem('x_json_data')));
    ```
+
+google-site-verification=mvwP2fBfnxCDRkHaKoQAVIrQ6Pku0-uzsDZFzbXaWos

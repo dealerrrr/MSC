@@ -7,12 +7,12 @@
 :root {
   --primary-dark: #0f0f23;
   --primary-darker: #0a0a15;
-  --accent-blue: #0060ff;
-  --accent-green: #059669;
+  --accent-blue: #0060ff; /* ##0040ff; #00d4ff; */
+  --accent-green: #059669; /* #00ff88; */
   --accent-purple: #b847ff;
-  --accent-orange: #ff8000;
-  --accent-red: #ff0040;
-  --white: #dcdcdc;
+  --accent-orange: #ff8000; /* ff6b35; */
+  --accent-red: #ff0040; /* #ff3366; */
+  --white: #dcdcdc; /*ffffff; */
   --gray-100: #f8fafc;
   --gray-200: #e2e8f0;
   --gray-700: #374151;
@@ -1728,8 +1728,7 @@ body {
   color: var(--white);
 }
 
-@media;
-768px) {
+@media (min-width: 768px) {
   .final-cta h2 {
     margin-bottom: 1.5rem;
   }

@@ -6,24 +6,37 @@ import {
   showSubscriptionConfirmation,
 } from './email-json-handler.js';
 
-// FAQ functionality
-function toggleFAQ(element) {
-  const faqItem = element.parentElement;
-  const answer = faqItem.querySelector('.faq-answer');
-  const arrow = element.querySelector('.faq-arrow');
+// Funcionalidad para el acordeón de FAQ
+document.addEventListener('DOMContentLoaded', () => {
+  const faqItems = document.querySelectorAll('.faq-item');
 
-  // Close all other FAQs
-  document.querySelectorAll('.faq-item').forEach(item => {
-    if (item !== faqItem) {
-      item.querySelector('.faq-answer').classList.remove('active');
-      item.querySelector('.faq-arrow').classList.remove('active');
-    }
+  faqItems.forEach(item => {
+    const button = item.querySelector('.faq-question');
+
+    button.addEventListener('click', () => {
+      const answer = item.querySelector('.faq-answer');
+      const arrow = button.querySelector('.faq-arrow');
+      const isActive = answer.classList.contains('active');
+
+      // Cerrar todos los demás acordeones
+      faqItems.forEach(otherItem => {
+        if (otherItem !== item) {
+          otherItem.querySelector('.faq-answer').classList.remove('active');
+          otherItem.querySelector('.faq-arrow').classList.remove('active');
+        }
+      });
+
+      // Abrir o cerrar el actual
+      if (!isActive) {
+        answer.classList.add('active');
+        arrow.classList.add('active');
+      } else {
+        answer.classList.remove('active');
+        arrow.classList.remove('active');
+      }
+    });
   });
-
-  // Toggle current FAQ
-  answer.classList.toggle('active');
-  arrow.classList.toggle('active');
-}
+});
 
 // Scroll to final CTA
 function scrollToFinalCTA() {
@@ -34,7 +47,6 @@ function scrollToFinalCTA() {
 
 // Exponer la función globalmente para que pueda ser accedida desde el HTML
 window.scrollToFinalCTA = scrollToFinalCTA;
-window.toggleFAQ = toggleFAQ;
 
 // Form submissions
 document.getElementById('heroForm').addEventListener('submit', function (e) {

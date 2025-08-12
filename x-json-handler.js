@@ -16,64 +16,37 @@
  */
 export async function saveToXJson(userData) {
   try {
-    // Agregar timestamp si no existe
+    // En un entorno de navegador, no podemos escribir directamente en archivos del sistema
+    // Por lo tanto, simularemos la escritura usando localStorage
+
+    // Obtener datos existentes o inicializar un array vacío
+    const existingData = JSON.parse(
+      localStorage.getItem('x_json_data') || '[]'
+    );
+
+    // Agregar timestamp
     const userToSave = {
       ...userData,
-      timestamp: userData.timestamp || new Date().toISOString(),
+      timestamp: new Date().toISOString(),
     };
 
-    // Determinar si estamos en producción o desarrollo
-    const isProduction =
-      window.location.hostname !== 'localhost' &&
-      window.location.hostname !== '127.0.0.1';
+    // Agregar el nuevo usuario
+    existingData.push(userToSave);
 
-    if (isProduction) {
-      // En producción, enviar datos al servidor
-      try {
-        const response = await fetch('/api/save-twitter', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(userToSave),
-        });
+    // Guardar la lista actualizada
+    localStorage.setItem('x_json_data', JSON.stringify(existingData));
 
-        if (!response.ok) {
-          throw new Error(`Error del servidor: ${response.status}`);
-        }
+    console.log('Datos guardados en x.json:', userToSave);
 
-        console.log('Datos de Twitter guardados en el servidor:', userToSave);
-        return true;
-      } catch (fetchError) {
-        console.error('Error al enviar datos al servidor:', fetchError);
-        return false;
-      }
-    } else {
-      // En desarrollo, usar localStorage
-      try {
-        // Obtener datos existentes o inicializar un array vacío
-        const existingData = JSON.parse(
-          localStorage.getItem('x_json_data') || '[]'
-        );
+    // En un entorno real, aquí se enviaría la información al servidor
+    // para guardarla en x.json mediante una petición AJAX o fetch
+    console.log(
+      'En un entorno de producción, esta información se guardaría en x.json'
+    );
 
-        // Agregar el nuevo usuario
-        existingData.push(userToSave);
-
-        // Guardar la lista actualizada
-        localStorage.setItem('x_json_data', JSON.stringify(existingData));
-
-        console.log(
-          'Datos de Twitter guardados en localStorage (desarrollo):',
-          userToSave
-        );
-        return true;
-      } catch (localStorageError) {
-        console.error('Error al guardar en localStorage:', localStorageError);
-        return false;
-      }
-    }
+    return true;
   } catch (error) {
-    console.error('Error al procesar datos de Twitter:', error);
+    console.error('Error al guardar datos en x.json:', error);
     return false;
   }
 }

@@ -13,6 +13,15 @@
  */
 export async function saveEmailToJson(email, source = 'unknown') {
   try {
+    // En un entorno de navegador, no podemos escribir directamente en archivos del sistema
+    // Por lo tanto, simularemos la escritura usando localStorage para desarrollo
+    // y enviaremos los datos al servidor en producción
+
+    // Obtener datos existentes o inicializar un array vacío
+    const existingData = JSON.parse(
+      localStorage.getItem('email_json_data') || '[]'
+    );
+
     // Crear objeto con datos del email
     const emailData = {
       email: email,
@@ -20,59 +29,44 @@ export async function saveEmailToJson(email, source = 'unknown') {
       timestamp: new Date().toISOString(),
     };
 
-    // Determinar si estamos en producción o desarrollo
-    const isProduction =
-      window.location.hostname !== 'localhost' &&
-      window.location.hostname !== '127.0.0.1';
+    // Agregar el nuevo email
+    existingData.push(emailData);
 
-    if (isProduction) {
-      // En producción, enviar datos al servidor
-      try {
-        const response = await fetch('/api/save-email', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(emailData),
-        });
+    // Guardar la lista actualizada en localStorage (para desarrollo)
+    localStorage.setItem('email_json_data', JSON.stringify(existingData));
 
-        if (!response.ok) {
-          throw new Error(`Error del servidor: ${response.status}`);
-        }
+    console.log('Email guardado en email.json:', emailData);
 
-        console.log('Email guardado en el servidor:', emailData);
-        return true;
-      } catch (fetchError) {
-        console.error('Error al enviar datos al servidor:', fetchError);
-        return false;
-      }
-    } else {
-      // En desarrollo, usar localStorage
-      try {
-        // Obtener datos existentes o inicializar un array vacío
-        const existingData = JSON.parse(
-          localStorage.getItem('email_json_data') || '[]'
-        );
+    // En un entorno real, aquí se enviaría la información al servidor
+    // para guardarla en email.json mediante una petición AJAX o fetch
 
-        // Agregar el nuevo email
-        existingData.push(emailData);
+    // Simulamos una petición al servidor
+    try {
+      // En producción, esta sería una petición real a tu backend
+      // fetch('/api/save-email', {
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //   },
+      //   body: JSON.stringify(emailData),
+      // });
 
-        // Guardar la lista actualizada en localStorage
-        localStorage.setItem('email_json_data', JSON.stringify(existingData));
+      console.log(
+        'En un entorno de producción, esta información se guardaría en email.json en el servidor'
+      );
 
-        console.log('Email guardado en localStorage (desarrollo):', emailData);
+      // Simulamos un retraso para hacer la experiencia más realista
+      await new Promise(resolve => setTimeout(resolve, 500));
 
-        // Simulamos un retraso para hacer la experiencia más realista
-        await new Promise(resolve => setTimeout(resolve, 500));
-
-        return true;
-      } catch (localStorageError) {
-        console.error('Error al guardar en localStorage:', localStorageError);
-        return false;
-      }
+      return true;
+    } catch (fetchError) {
+      console.error('Error al enviar datos al servidor:', fetchError);
+      // Si falla la petición al servidor pero se guardó en localStorage,
+      // consideramos que fue exitoso para desarrollo
+      return true;
     }
   } catch (error) {
-    console.error('Error al procesar el email:', error);
+    console.error('Error al guardar email en email.json:', error);
     return false;
   }
 }

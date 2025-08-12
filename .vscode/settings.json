@@ -1,0 +1,21 @@
+{
+    // --- Configuración de GitLens para Novatos ---
+
+    // Muestra información del autor del código sobre la función o clase actual.
+    "gitlens.codeLens.enabled": true,
+
+    // En la barra de estado, muestra quién modificó por última vez la línea actual y cuándo.
+    "gitlens.currentLine.enabled": true,
+
+    // Al pasar el mouse sobre una línea, muestra la información detallada del commit.
+    "gitlens.hovers.currentLine.over": "line",
+
+    // Formato de fecha más legible (ej: "hace 2 semanas").
+    // Puedes cambiarlo a "MM/DD/YYYY" si prefieres una fecha absoluta.
+    "gitlens.defaultDateFormat": "relative",
+
+    // Activa las vistas de Repositorios, Commits y Ramas en la barra lateral de VS Code.
+    "gitlens.views.repositories.enabled": true,
+    "gitlens.views.commits.enabled": true,
+    "gitlens.views.branches.enabled": true
+}

@@ -43,17 +43,17 @@ export async function saveEmailToJson(email, source = 'unknown') {
     // Simulamos una petición al servidor
     try {
       // En producción, esta sería una petición real a tu backend
-      // fetch('/api/save-email', {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //   },
-      //   body: JSON.stringify(emailData),
-      // });
+      fetch('/api/save-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(emailData),
+      });
 
-      console.log(
-        'En un entorno de producción, esta información se guardaría en email.json en el servidor'
-      );
+      // console.log(
+      //   'En un entorno de producción, esta información se guardaría en email.json en el servidor'
+      // );
 
       // Simulamos un retraso para hacer la experiencia más realista
       await new Promise(resolve => setTimeout(resolve, 500));

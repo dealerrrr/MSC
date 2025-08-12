@@ -127,6 +127,7 @@ export function showSubscriptionConfirmation(email) {
   message.style.marginBottom = '20px';
   message.style.fontSize = '16px';
   message.style.lineHeight = '1.5';
+  message.style.color = '#333'; // Added for visibility
 
   const subMessage = document.createElement('p');
   subMessage.textContent =
@@ -134,11 +135,12 @@ export function showSubscriptionConfirmation(email) {
   subMessage.style.marginBottom = '25px';
   subMessage.style.fontSize = '14px';
   subMessage.style.opacity = '0.8';
+  subMessage.style.color = '#333'; // Added for visibility
 
   // Botón de aceptar
   const acceptButton = document.createElement('button');
   acceptButton.textContent = 'Entendido';
-  acceptButton.style.backgroundColor = '#1e40af';
+  acceptButton.style.backgroundColor = '#4CAF50'; // Green
   acceptButton.style.color = 'white';
   acceptButton.style.border = 'none';
   acceptButton.style.borderRadius = '4px';
@@ -147,10 +149,10 @@ export function showSubscriptionConfirmation(email) {
   acceptButton.style.cursor = 'pointer';
   acceptButton.style.transition = 'background-color 0.3s';
   acceptButton.onmouseover = () => {
-    acceptButton.style.backgroundColor = '#3b82f6';
+    acceptButton.style.backgroundColor = '#45a049'; // Darker green on hover
   };
   acceptButton.onmouseout = () => {
-    acceptButton.style.backgroundColor = '#1e40af';
+    acceptButton.style.backgroundColor = '#4CAF50';
   };
   acceptButton.onclick = () => {
     document.body.removeChild(overlay);

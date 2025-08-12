@@ -26,12 +26,21 @@
        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 
-      <!-- Directivas para robots -->
+       <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-JBRPBRXXKP"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        Function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-JBRPBRXXKP');
+        </script>
+
+       <!-- Directivas para robots -->
        <meta name="robots" content="index, follow" />
 
       <!-- Verificación de motores de búsqueda -->
-       <meta name="google-site-verification" content="TU_CODIGO_DE_VERIFICACION_GOOGLE">
-       <meta name="msvalidate.01" content="TU_CODIGO_DE_VERIFICACION_BING">
+       <meta name="google-site-verification" content="mvwP2fBfnxCDRkHaKoQAVIrQ6Pku0-uzsDZFzbXaWos" />
+       <meta name="msvalidate.01" content="51928245EE6B788D7EEB2CAF8694FB06" />
 
       <!-- Configuración de indexación -->
        <meta name="revisit-after" content="7 days">

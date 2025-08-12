@@ -892,3 +892,10 @@ body {
   outline: 3px solid var(--accent-blue);
   outline-offset: 2px;
 }
+
+.back-link {
+  display: inline-block;
+  margin-top: 2rem;
+  color: white;
+  text-decoration: underline;
+}
